@@ -23,7 +23,7 @@ export default function Testimonials() {
         <div className="testimonial-overlay">
 
           <h3>
-            Iszmail & Susisumaiya
+            Manoj & Abi
           </h3>
 
           <p>

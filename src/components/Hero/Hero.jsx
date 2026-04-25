@@ -39,7 +39,7 @@ export default function Hero() {
   // open whatsapp
   const handleWhatsAppClick = () => {
     window.open(
-      "https://wa.me/917092263880",
+      "https://wa.me/919597258078 ",
       "_blank"
     );
   };
@@ -55,7 +55,7 @@ export default function Hero() {
         </div>
 
         <div className="brand-title">
-          The Wedding Craft
+          PON TAMIL PHOTOGRAPHY
         </div>
 
         <ul className={`nav-links ${menuOpen ? "active" : ""}`}>

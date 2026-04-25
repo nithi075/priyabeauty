@@ -18,7 +18,7 @@ export default function About() {
       </div>
 
       {/* Updated image layout */}
-      <div className="about-images">
+      {/* <div className="about-images">
 
         <img
           src={mainImg}
@@ -35,9 +35,9 @@ export default function About() {
           src={smallImg}
           alt="small"
           className="small-img"
-        />
+        /> */}
 
-      </div>
+      {/* </div> */}
 
     </section>
   );

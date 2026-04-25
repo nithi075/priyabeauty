@@ -1,17 +1,17 @@
-import "./Footer.css";
+import "./footer.css";
 
 export default function Footer() {
 
   const handleInstagramClick = () => {
     window.open(
-      "https://www.instagram.com/theweddingcraft.in/",
+      "https://www.instagram.com/pontamilphotography/",
       "_blank"
     );
   };
 
   const handleContactClick = () => {
     window.open(
-      "https://wa.me/917092263880",
+      "https://wa.me/919597258078",
       "_blank"
     );
   };
@@ -25,7 +25,7 @@ export default function Footer() {
 
           {/* logo */}
           <div className="footer-logo">
-            The Wedding Craft
+            Pontamil Photography
           </div>
 
           {/* buttons */}
@@ -43,7 +43,7 @@ export default function Footer() {
 
           {/* copyright */}
           <p className="copyright">
-            © 2026 The Wedding Craft Photography
+            © 2026 Pontamil Photography
           </p>
 
         </div>
