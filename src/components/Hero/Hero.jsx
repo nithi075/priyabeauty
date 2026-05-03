@@ -1,170 +1,128 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight, Play } from "lucide-react";
 import "./Hero.css";
 import logoimg from "../../assets/logo.png";
 
-// hero images
 import hero1 from "../../assets/hero1.jpg";
 import hero2 from "../../assets/hero2.jpg";
 import hero3 from "../../assets/hero3.jpg";
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const heroImages = [hero1, hero2, hero3];
+  const [scrolled, setScrolled] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
 
-  // auto slide every 5 sec
+  const heroImages = [hero1, hero2, hero3];
+
+  /* SCROLL EFFECT */
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* SLIDER */
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) =>
         prev === heroImages.length - 1 ? 0 : prev + 1
       );
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
-
-  // scroll to gallery section
-  const handlePortfolioClick = () => {
-    const gallerySection = document.getElementById("gallery");
-
-    if (gallerySection) {
-      gallerySection.scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  };
-
-  // open whatsapp
-  const handleWhatsAppClick = () => {
-    window.open(
-      "https://wa.me/919597258078 ",
-      "_blank"
-    );
-  };
 
   return (
     <section className="hero" id="home">
 
-      {/* Navbar */}
-      <nav className="navbar">
+      {/* ================= NAVBAR ================= */}
+      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+        <div className="nav-container">
 
-        <div className="logo">
-          <img src={logoimg} alt="logo" />
+          <div className="logo-section">
+            <img src={logoimg} alt="logo" className="nav-logo" />
+            <div className="brand-info">
+              <span className="brand-name">Clicks By Korniza</span>
+              <span className="brand-tag">WEDDING STORIES</span>
+            </div>
+          </div>
+
+          <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+            <li><a href="#home" onClick={()=>setMenuOpen(false)}>Home</a></li>
+            <li><a href="#gallery" onClick={()=>setMenuOpen(false)}>Portfolio</a></li>
+            <li><a href="#services" onClick={()=>setMenuOpen(false)}>Services</a></li>
+            <li><a href="#contact" onClick={()=>setMenuOpen(false)}>Contact</a></li>
+          </ul>
+
+          <div className="nav-right">
+            <button
+              className="nav-btn desktop-only"
+              onClick={() => window.open("https://wa.me/919597258078")}
+            >
+              Enquire
+            </button>
+
+            <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X size={28} /> : <Menu size={28} />}
+            </div>
+          </div>
+
         </div>
-
-        <div className="brand-title">
-          PON TAMIL PHOTOGRAPHY
-        </div>
-
-        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <li>
-            <a href="#home" onClick={() => setMenuOpen(false)}>
-              Home
-            </a>
-          </li>
-
-          <li>
-            <a href="#gallery" onClick={() => setMenuOpen(false)}>
-              Portfolio
-            </a>
-          </li>
-
-          <li>
-            <a href="#services" onClick={() => setMenuOpen(false)}>
-              Services
-            </a>
-          </li>
-
-          <li>
-            <a href="#gallery" onClick={() => setMenuOpen(false)}>
-              Gallery
-            </a>
-          </li>
-
-          <li>
-            <a href="#testimonials" onClick={() => setMenuOpen(false)}>
-              Testimonials
-            </a>
-          </li>
-
-          <li>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
-              Contact
-            </a>
-          </li>
-        </ul>
-
-        <button className="nav-btn desktop-btn">
-          Check Availability
-        </button>
-
-        <div
-          className="menu-icon"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </div>
-
       </nav>
 
-      {/* Hero Background Slider */}
+      {/* ================= BG SLIDER ================= */}
       <div className="hero-bg">
         {heroImages.map((img, index) => (
-          <img
+          <div
             key={index}
-            src={img}
-            alt={`hero-${index}`}
-            className={
-              index === currentImage
-                ? "active-slide"
-                : ""
-            }
+            className={`slide ${index === currentImage ? "active" : ""}`}
+            style={{ backgroundImage: `url(${img})` }}
           />
         ))}
+        <div className="hero-overlay-gradient"></div>
       </div>
 
-      {/* Hero Content */}
-      <div className="hero-overlay">
+      {/* ================= CONTENT ================= */}
+      <div className="hero-content">
+        <div className="content-inner">
 
-        <span className="sub-title">
-          Luxury Wedding Photography
-        </span>
+          <span className="sub-title">
+            FINE ART WEDDING PHOTOGRAPHY
+          </span>
 
-        <h1>
-          Capturing Love,
-          <br />
-          One Frame at a Time
-        </h1>
+          <h1 className="main-heading">
+            Capturing Your <span className="italic-text">Moments</span><br/>
+            With Emotion & Light
+          </h1>
 
-        <p>
-          From intimate moments to grand celebrations,
-          we preserve every emotion beautifully so your
-          memories last forever.
-        </p>
+          <p className="hero-description">
+            Every wedding tells a story. We capture the raw emotions,
+            timeless beauty, and fleeting moments that matter most.
+          </p>
 
-        <div className="hero-btns">
+          <div className="hero-btns">
+            <button
+              className="btn-primary"
+              onClick={() =>
+                document.getElementById("gallery")
+                  .scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Explore Work <ArrowRight size={14} />
+            </button>
 
-          {/* Scroll to Gallery */}
-          <button
-            className="hero-btn"
-            onClick={handlePortfolioClick}
-          >
-            View Portfolio
-          </button>
-
-          {/* Open WhatsApp */}
-          <button
-            className="hero-btn-outline"
-            onClick={handleWhatsAppClick}
-          >
-            Book Consultation
-          </button>
+            <button
+              className="btn-secondary"
+              onClick={() =>
+                window.open("https://wa.me/919597258078")
+              }
+            >
+              <Play size={12} /> Book Now
+            </button>
+          </div>
 
         </div>
-
       </div>
+
     </section>
   );
 }

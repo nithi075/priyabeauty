@@ -1,55 +1,84 @@
+import { FaInstagram } from "react-icons/fa";
+import { FiSend, FiPhone } from "react-icons/fi";
 import "./footer.css";
 
 export default function Footer() {
-
-  const handleInstagramClick = () => {
-    window.open(
-      "https://www.instagram.com/pontamilphotography/",
-      "_blank"
-    );
-  };
-
-  const handleContactClick = () => {
-    window.open(
-      "https://wa.me/919597258078",
-      "_blank"
-    );
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer">
+      <div className="footer-container">
 
-      <div className="footer-curve">
-
-        <div className="footer-content">
-
-          {/* logo */}
-          <div className="footer-logo">
-            Pontamil Photography
+        {/* TOP */}
+        <div className="footer-top">
+          
+          <div className="footer-brand-section">
+            <h2 className="footer-logo">CLICKS BY KORNIZA</h2>
+            <span className="footer-tagline">
+              ARTISANAL WEDDING PHOTOGRAPHY
+            </span>
           </div>
 
-          {/* buttons */}
-          <div className="footer-buttons">
+          <div className="footer-cta">
+            <p>Ready to preserve your story?</p>
 
-            <button onClick={handleInstagramClick}>
-              INSTAGRAM
+            <button
+              className="footer-main-btn"
+              onClick={() =>
+                window.open("https://wa.me/919597258078", "_blank")
+              }
+            >
+              <span>GET IN TOUCH</span>
+              <FiSend size={14} />
             </button>
-
-            <button onClick={handleContactClick}>
-              CONTACT
-            </button>
-
           </div>
+        </div>
 
-          {/* copyright */}
+        <div className="footer-divider"></div>
+
+        {/* MIDDLE */}
+        <div className="footer-middle">
+          
+          <nav className="footer-nav">
+            <a href="#home">HOME</a>
+            <a href="#gallery">PORTFOLIO</a>
+            <a href="#services">SERVICES</a>
+            <a href="#testimonials">JOURNAL</a>
+          </nav>
+
+          <div className="footer-socials">
+            <a
+              href="https://www.instagram.com/clicksbykorniza/"
+              target="_blank"
+              rel="noreferrer"
+              className="social-link"
+            >
+              <FaInstagram size={18} />
+            </a>
+
+            <a
+              href="https://wa.me/919597258078"
+              target="_blank"
+              rel="noreferrer"
+              className="social-link"
+            >
+              <FiPhone size={18} />
+            </a>
+          </div>
+        </div>
+
+        {/* BOTTOM */}
+        <div className="footer-bottom">
           <p className="copyright">
-            © 2026 Pontamil Photography
+            © {currentYear} CLICKS BY KORNIZA. ALL RIGHTS RESERVED.
           </p>
 
+          <div className="footer-legal">
+            <span>CRAFTED WITH PASSION</span>
+          </div>
         </div>
 
       </div>
-
     </footer>
   );
 }

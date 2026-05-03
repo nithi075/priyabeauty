@@ -1,43 +1,40 @@
 import "./About.css";
-
-import mainImg from "../../assets/about1.png";
-import smallImg from "../../assets/about2.jpg";
+import coupleImg from "../../assets/about1.jpg";
 
 export default function About() {
   return (
     <section className="about">
 
-      <div>
-        <h2>ABOUT US</h2>
-
-        <p>
-          We specialize in capturing timeless love stories through elegant imagery.
-        </p>
-
-        <button>READ MORE</button>
+      {/* LEFT IMAGE */}
+      <div className="about-left">
+        <img src={coupleImg} alt="The Wedding Story" />
+        <div className="fade-overlay"></div>
       </div>
 
-      {/* Updated image layout */}
-      {/* <div className="about-images">
+      {/* RIGHT CONTENT */}
+      <div className="about-right">
 
-        <img
-          src={mainImg}
-          alt="main"
-          className="main-img"
-        />
+        <span className="about-small">MEET THE ARTIST</span>
 
-        <div className="experience-box">
-          <h3>08</h3>
-          <p>YEARS OF MASTERY</p>
-        </div>
+        <h2 className="about-title">
+          Telling Your <span>Legacy</span>
+        </h2>
 
-        <img
-          src={smallImg}
-          alt="small"
-          className="small-img"
-        /> */}
+        <p className="about-sub">
+          Fine art photography for the modern, soulful couple.
+        </p>
 
-      {/* </div> */}
+        <p className="about-text">
+          We believe that photography is more than just taking pictures; it is about 
+          preserving the raw emotions, the quiet glances, and the grand celebrations 
+          that define your life’s greatest milestones. With a keen eye for detail 
+          and a passion for storytelling, we transform your fleeting moments into 
+          timeless heirlooms that you will cherish for generations.
+        </p>
+
+        <button className="about-btn">VIEW PORTFOLIO</button>
+
+      </div>
 
     </section>
   );

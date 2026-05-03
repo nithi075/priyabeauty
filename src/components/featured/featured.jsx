@@ -1,6 +1,4 @@
 import "./featured.css";
-
-// your gallery images
 import img1 from "../../assets/featured/img1.jpg";
 import img2 from "../../assets/featured/img2.jpg";
 import img3 from "../../assets/featured/img3.jpg";
@@ -10,79 +8,64 @@ import img6 from "../../assets/featured/img6.jpg";
 import img7 from "../../assets/featured/img7.jpg";
 import img8 from "../../assets/featured/img8.jpg";
 
-// your video
-import weddingVideo from "../../assets/featured/wedding-video.mp4";
-
 export default function Featured() {
 
-  const galleryImages = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8
-  ];
-
   const handleInstagramRedirect = () => {
-    window.open(
-      "https://www.instagram.com/theweddingcraft.in/",
-      "_blank"
-    );
+    window.open("https://www.instagram.com/clicksbykorniza/", "_blank");
   };
 
   return (
     <section className="featured">
 
-      <span className="tag">
-        OUR FAVORITE MOMENTS
-      </span>
+      <span className="tag">OUR FAVORITE MOMENTS</span>
+      <h2>FEATURED WEDDING</h2>
 
-      <h2>
-        FEATURED WEDDING
-      </h2>
+      <div className="bento-container">
 
-      {/* video section */}
-      <div className="featured-video-container">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="featured-video"
-        >
-          <source src={weddingVideo} type="video/mp4" />
-        </video>
-      </div>
-
-      {/* collage */}
-      <div className="featuredGrid">
-
-        {galleryImages.slice(0,3).map((img,index)=>(
-          <img key={index} src={img} alt="" />
-        ))}
-
-        <div className="quote-box">
-          MEMORIES
-          <br/>
-          THAT LAST
-          <br/>
-          FOREVER
+        {/* TOP IMAGE */}
+        <div className="bento-item main-header">
+          <img src={img1} alt="" />
+          <div className="overlay-text">
+            <h3>THE CHATEAU RECEPTION</h3>
+          </div>
         </div>
 
-        {galleryImages.slice(3).map((img,index)=>(
-          <img key={index} src={img} alt="" />
-        ))}
+        {/* GRID */}
+        <div className="bento-grid">
 
+          <div className="bento-item tall">
+            <img src={img2} alt="" />
+          </div>
+
+          <div className="bento-item wide">
+            <img src={img3} alt="" />
+          </div>
+
+          <div className="bento-item center-play">
+            <img src={img4} alt="" />
+          </div>
+
+          <div className="bento-item tall">
+            <img src={img5} alt="" />
+          </div>
+
+          <div className="bento-item ">
+            <img src={img6} alt="" />
+          </div>
+
+          <div className="bento-item wide">
+            <img src={img7} alt="" />
+          </div>
+{/* 
+          <div className="bento-item  wide">
+            <img src={img8} alt="" />
+          </div> */}
+
+        </div>
       </div>
 
-      <button 
-        className="featured-btn"
-        onClick={handleInstagramRedirect}
-      >
-        View More ↗
+      <button className="featured-btn" onClick={handleInstagramRedirect}>
+        VIEW FULL GALLERY
       </button>
 
     </section>
