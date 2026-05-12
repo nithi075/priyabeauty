@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import {
+  motion,
+  AnimatePresence
+} from "framer-motion";
+
 import "./Gallery.css";
 
 import wedding from "../assets/img2.jpg";
@@ -7,52 +13,355 @@ import couple from "../assets/img3.jpg";
 import portrait from "../assets/img4.jpg";
 import candid from "../assets/img5.jpg";
 
-export default function Gallery() {
+export default function Gallery(){
+
+  /* =========================================
+     DATA
+  ========================================= */
+
   const items = [
-    { title: "Baby Shower", category: "Celebrations", img: wedding2 },
-    { title: "Wedding Moments", category: "Luxury Weddings", img: wedding },
-    { title: "Couple Moments", category: "Love Stories", img: couple },
-    { title: "Portrait Studio", category: "Portraits", img: portrait },
-    { title: "Bride Photography", category: "Moments", img: candid }
+
+    {
+      title:"Baby Shower",
+      category:"Celebrations",
+      img:wedding2
+    },
+
+    {
+      title:"Wedding Moments",
+      category:"Luxury Weddings",
+      img:wedding
+    },
+
+    {
+      title:"Couple Moments",
+      category:"Love Stories",
+      img:couple
+    },
+
+    {
+      title:"Portrait Studio",
+      category:"Portraits",
+      img:portrait
+    },
+
+    {
+      title:"Bride Photography",
+      category:"Moments",
+      img:candid
+    }
+
   ];
 
-  const [activeIndex, setActiveIndex] = useState(1);
+  /* =========================================
+     ACTIVE CARD
+  ========================================= */
 
-  return (
-    <section className="portfolio">
-      <div className="portfolio-content">
-        <span className="p-tag">PORTFOLIO</span>
-        <p className="p-sub">Explore our curated collection of artistic wedding photography.</p>
+  const [activeIndex,setActiveIndex] = useState(1);
+
+  /* =========================================
+     AUTO SLIDE
+  ========================================= */
+
+  useEffect(()=>{
+
+    const interval = setInterval(()=>{
+
+      setActiveIndex((prev)=>
+
+        prev === items.length - 1
+        ? 0
+        : prev + 1
+
+      );
+
+    },4000);
+
+    return ()=> clearInterval(interval);
+
+  },[items.length]);
+
+  /* =========================================
+     POSITION LOGIC
+  ========================================= */
+
+  const getPosition = (index)=>{
+
+    const total = items.length;
+
+    let position = index - activeIndex;
+
+    /* loop effect */
+
+    if(position < -total / 2){
+
+      position += total;
+
+    }
+
+    if(position > total / 2){
+
+      position -= total;
+
+    }
+
+    return position;
+
+  };
+
+  return(
+
+    <section
+      className="portfolio"
+      id="portfolio"
+    >
+
+      <div className="portfolio-wrapper">
+
+        {/* =========================================
+           HEADER
+        ========================================= */}
+
+        <motion.div
+
+          className="portfolio-header"
+
+          initial={{
+            opacity:0,
+            y:40
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          transition={{
+            duration:1.2,
+            ease:[0.16,1,0.3,1]
+          }}
+
+          viewport={{
+            once:true
+          }}
+
+        >
+
+          <span className="p-tag">
+
+            PORTFOLIO
+
+          </span>
+
+          <h2 className="portfolio-title">
+
+            Timeless Frames &
+            <br/>
+
+            <span>
+
+              Editorial Stories
+
+            </span>
+
+          </h2>
+
+          <p className="p-sub">
+
+            Explore our curated collection
+            of cinematic wedding storytelling,
+            luxury celebrations,
+            and emotional moments.
+
+          </p>
+
+        </motion.div>
+
+        {/* =========================================
+           SLIDER
+        ========================================= */}
 
         <div className="portfolio-slider">
-          {items.map((item, index) => {
-            let position = index - activeIndex;
-            return (
-              <div
+
+          {items.map((item,index)=>{
+
+            const position =
+            getPosition(index);
+
+            const isActive =
+            index === activeIndex;
+
+            return(
+
+              <motion.div
+
                 key={index}
-                className={`portfolio-card ${index === activeIndex ? "active" : ""}`}
-                style={{
-                  transform: `translateX(${position * 110}%) scale(${index === activeIndex ? 1.1 : 0.85})`,
-                  zIndex: index === activeIndex ? 10 : 1,
-                  opacity: Math.abs(position) > 1 ? 0 : 1 // Show only 3 cards
+
+                className={`portfolio-card ${
+                  isActive
+                  ? "active"
+                  : ""
+                }`}
+
+                animate={{
+
+                  x:
+
+                  position === 0
+                  ? "0%"
+
+                  : position < 0
+                  ? "-105%"
+
+                  : "105%",
+
+                  scale:
+
+                  isActive
+                  ? 1
+                  : 0.82,
+
+                  rotate:
+
+                  position < 0
+                  ? -6
+                  : position > 0
+                  ? 6
+                  : 0,
+
+                  opacity:
+
+                  Math.abs(position) > 1
+                  ? 0
+                  : 1,
+
+                  filter:
+
+                  isActive
+                  ? "blur(0px)"
+                  : "blur(1px)"
+
                 }}
-                onClick={() => setActiveIndex(index)}
+
+                transition={{
+
+                  duration:1.2,
+
+                  ease:[0.16,1,0.3,1]
+
+                }}
+
+                style={{
+
+                  zIndex:
+
+                  isActive
+                  ? 10
+                  : 1
+
+                }}
+
+                onClick={()=>
+                  setActiveIndex(index)
+                }
+
               >
-                <div className="card-border-frame">
-                  <img src={item.img} alt={item.title} />
+
+                {/* =========================================
+                   IMAGE
+                ========================================= */}
+
+                <div className="card-image-wrap">
+
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                  />
+
+                  {/* overlay */}
+
+                  <div className="card-overlay"></div>
+
                 </div>
-              </div>
+
+              </motion.div>
+
             );
+
           })}
+
         </div>
 
-        {/* Dynamic Details Section Below Slider */}
-        <div className="active-details">
-          <h2>{items[activeIndex].title}</h2>
-          <p>A celebration of love captured with artistic precision and heart.</p>
-          <button className="portfolio-btn">PORTFOLIO GALLERY</button>
-        </div>
+        {/* =========================================
+           DETAILS
+        ========================================= */}
+
+        <AnimatePresence
+          mode="wait"
+        >
+
+          <motion.div
+
+            key={activeIndex}
+
+            className="active-details"
+
+            initial={{
+              opacity:0,
+              y:40
+            }}
+
+            animate={{
+              opacity:1,
+              y:0
+            }}
+
+            exit={{
+              opacity:0,
+              y:-20
+            }}
+
+            transition={{
+              duration:0.8,
+              ease:[0.16,1,0.3,1]
+            }}
+
+          >
+
+            <span className="active-category">
+
+              {items[activeIndex].category}
+
+            </span>
+
+            <h3>
+
+              {items[activeIndex].title}
+
+            </h3>
+
+            <p>
+
+              A celebration of emotions,
+              timeless storytelling,
+              and artistic luxury photography.
+
+            </p>
+
+            <button className="portfolio-btn">
+
+              VIEW FULL GALLERY
+
+            </button>
+
+          </motion.div>
+
+        </AnimatePresence>
+
       </div>
+
     </section>
+
   );
+
 }

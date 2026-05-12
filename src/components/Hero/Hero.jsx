@@ -1,128 +1,329 @@
+
+
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowRight, Play } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+
 import "./Hero.css";
-import logoimg from "../../assets/logo.png";
 
 import hero1 from "../../assets/hero1.jpg";
 import hero2 from "../../assets/hero2.jpg";
 import hero3 from "../../assets/hero3.jpg";
 
 export default function Hero() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+
   const [currentImage, setCurrentImage] = useState(0);
 
-  const heroImages = [hero1, hero2, hero3];
+  const heroImages = [
+    hero1,
+    hero2,
+    hero3
+  ];
 
-  /* SCROLL EFFECT */
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  /* =========================================
+     PREMIUM CINEMATIC SLIDER
+  ========================================= */
 
-  /* SLIDER */
   useEffect(() => {
+
     const interval = setInterval(() => {
+
       setCurrentImage((prev) =>
-        prev === heroImages.length - 1 ? 0 : prev + 1
+        prev === heroImages.length - 1
+          ? 0
+          : prev + 1
       );
-    }, 5000);
+
+    }, 6500);
+
     return () => clearInterval(interval);
-  }, []);
+
+  }, [heroImages.length]);
+
+  /* =========================================
+     STAGGER ANIMATION
+  ========================================= */
+
+  const container = {
+
+    hidden: {},
+
+    show: {
+
+      transition: {
+
+        staggerChildren: 0.18,
+        delayChildren: 0.3
+
+      }
+
+    }
+
+  };
+
+  const fadeUp = {
+
+    hidden: {
+
+      opacity: 0,
+      y: 40
+
+    },
+
+    show: {
+
+      opacity: 1,
+      y: 0,
+
+      transition: {
+
+        duration: 1.2,
+        ease: [0.16, 1, 0.3, 1]
+
+      }
+
+    }
+
+  };
+
+  const titleReveal = {
+
+    hidden: {
+
+      opacity: 0,
+      y: 120
+
+    },
+
+    show: {
+
+      opacity: 1,
+      y: 0,
+
+      transition: {
+
+        duration: 1.5,
+        ease: [0.16, 1, 0.3, 1]
+
+      }
+
+    }
+
+  };
 
   return (
-    <section className="hero" id="home">
 
-      {/* ================= NAVBAR ================= */}
-      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-        <div className="nav-container">
+    <section className="hero" id="hero">
 
-          <div className="logo-section">
-            <img src={logoimg} alt="logo" className="nav-logo" />
-            <div className="brand-info">
-              <span className="brand-name">Clicks By Korniza</span>
-              <span className="brand-tag">WEDDING STORIES</span>
-            </div>
-          </div>
+      {/* =========================================
+          BACKGROUND
+      ========================================= */}
 
-          <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-            <li><a href="#home" onClick={()=>setMenuOpen(false)}>Home</a></li>
-            <li><a href="#gallery" onClick={()=>setMenuOpen(false)}>Portfolio</a></li>
-            <li><a href="#services" onClick={()=>setMenuOpen(false)}>Services</a></li>
-            <li><a href="#contact" onClick={()=>setMenuOpen(false)}>Contact</a></li>
-          </ul>
+      <div className="hero-bg-container">
 
-          <div className="nav-right">
-            <button
-              className="nav-btn desktop-only"
-              onClick={() => window.open("https://wa.me/919597258078")}
-            >
-              Enquire
-            </button>
+        <AnimatePresence mode="wait">
 
-            <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <X size={28} /> : <Menu size={28} />}
-            </div>
-          </div>
+          <motion.div
 
-        </div>
-      </nav>
+            key={currentImage}
 
-      {/* ================= BG SLIDER ================= */}
-      <div className="hero-bg">
-        {heroImages.map((img, index) => (
-          <div
-            key={index}
-            className={`slide ${index === currentImage ? "active" : ""}`}
-            style={{ backgroundImage: `url(${img})` }}
+            className="hero-slide"
+
+            style={{
+              backgroundImage:
+              `url(${heroImages[currentImage]})`
+            }}
+
+            initial={{
+              scale: 1.08,
+              opacity: 0
+            }}
+
+            animate={{
+              scale: 1,
+              opacity: 1
+            }}
+
+            exit={{
+              opacity: 0
+            }}
+
+            transition={{
+              duration: 2,
+              ease: [0.16, 1, 0.3, 1]
+            }}
+
           />
-        ))}
-        <div className="hero-overlay-gradient"></div>
+
+        </AnimatePresence>
+
+        <div className="hero-overlay"></div>
+
       </div>
 
-      {/* ================= CONTENT ================= */}
-      <div className="hero-content">
-        <div className="content-inner">
+      {/* =========================================
+          CONTENT
+      ========================================= */}
 
-          <span className="sub-title">
-            FINE ART WEDDING PHOTOGRAPHY
-          </span>
+      <div className="hero-content">
+
+        <motion.div
+
+          className="content-inner"
+
+          variants={container}
+
+          initial="hidden"
+
+          animate="show"
+
+        >
+
+          {/* SUB TITLE */}
+
+          <motion.span
+
+            className="sub-title"
+
+            variants={fadeUp}
+
+          >
+
+            HANDCRAFTING TIMELESS LEGACIES
+
+          </motion.span>
+
+          {/* MAIN TITLE */}
 
           <h1 className="main-heading">
-            Capturing Your <span className="italic-text">Moments</span><br/>
-            With Emotion & Light
+
+            <motion.div
+              className="title-line"
+              variants={titleReveal}
+            >
+
+              Capturing Your
+
+            </motion.div>
+
+            <motion.div
+              className="title-line"
+              variants={titleReveal}
+            >
+
+              <span className="italic-text">
+                Moments
+              </span>
+
+              {" "}With Emotion & Light
+
+            </motion.div>
+
           </h1>
 
-          <p className="hero-description">
-            Every wedding tells a story. We capture the raw emotions,
-            timeless beauty, and fleeting moments that matter most.
-          </p>
+          {/* DESCRIPTION */}
 
-          <div className="hero-btns">
-            <button
+          <motion.p
+
+            className="hero-description"
+
+            variants={fadeUp}
+
+          >
+
+            Luxury wedding photography &
+            cinematic films documenting
+            emotions, traditions, and timeless love stories.
+
+          </motion.p>
+
+          {/* BUTTONS */}
+
+          <motion.div
+
+            className="hero-btns"
+
+            variants={fadeUp}
+
+          >
+
+            {/* PRIMARY */}
+
+            <motion.button
+
+              whileHover={{
+                y: -3
+              }}
+
+              whileTap={{
+                scale: 0.97
+              }}
+
               className="btn-primary"
-              onClick={() =>
-                document.getElementById("gallery")
-                  .scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              Explore Work <ArrowRight size={14} />
-            </button>
 
-            <button
+            >
+
+              Explore Portfolio
+
+              <ArrowRight size={15} />
+
+            </motion.button>
+
+            {/* SECONDARY */}
+
+            <motion.button
+
+              whileHover={{
+                opacity: 0.7
+              }}
+
               className="btn-secondary"
-              onClick={() =>
-                window.open("https://wa.me/919597258078")
-              }
-            >
-              <Play size={12} /> Book Now
-            </button>
-          </div>
 
-        </div>
+              onClick={() =>
+                window.open(
+                  "https://wa.me/919597258078"
+                )
+              }
+
+            >
+
+              Book Consultation
+
+            </motion.button>
+
+          </motion.div>
+
+        </motion.div>
+
+      </div>
+
+      {/* =========================================
+          SCROLL INDICATOR
+      ========================================= */}
+
+      <div className="scroll-indicator">
+
+        <motion.div
+
+          className="mouse-line"
+
+          animate={{
+            y:[0,14,0]
+          }}
+
+          transition={{
+            duration:2,
+            repeat:Infinity,
+            ease:"easeInOut"
+          }}
+
+        />
+
       </div>
 
     </section>
+
   );
+
 }
+

@@ -1,88 +1,104 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./Navbar.css";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // 1. Scroll detection for glass effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 2. Prevent body scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "unset";
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
   }, [menuOpen]);
 
-  // 3. Close menu handler
-  const closeMenu = useCallback(() => setMenuOpen(false), []);
-
-  const navLinks = [
-    { id: "01", name: "Home", href: "#hero" },
-    { id: "02", name: "About", href: "#about" },
-    { id: "03", name: "Portfolio", href: "#work" },
+  const navItems = [
+    { name: "HOME", href: "#hero" },
+    { name: "ABOUT US", href: "#about", hasSub: true },
+    { name: "DESTINATION", href: "#destination", hasSub: true },
+    { name: "FILMS", href: "#films" },
+    { name: "PHOTOGRAPHY", href: "#photography", hasSub: true },
+    { name: "POETRY", href: "#poetry" },
+    { name: "BLOG", href: "#blog" },
+    { name: "BOOK US", href: "#contact" }
   ];
 
   return (
-    <nav className={`nav ${scrolled ? "nav-scroll" : ""} ${menuOpen ? "nav-active" : ""}`}>
-      <div className="nav-container">
-        <div className="logo-wrapper">
-          <h2 className="logo">
-           Mihtuna<span>Photography</span>
-          </h2>
+    <nav className={`navbar ${scrolled ? "navbar-scroll" : ""}`}>
+      <div className="navbar-container">
+        {/* LOGO */}
+        <div className="logo">
+          Click<span>By Korniza</span>
         </div>
 
-        {/* Desktop Links */}
-        <div className="nav-links">
-          {navLinks.map((link) => (
-            <a key={link.id} href={link.href} className="link-item">
-              {link.name}
-            </a>
+        {/* DESKTOP MENU */}
+        <div className="desktop-menu">
+          {navItems.map((item, index) => (
+            <a href={item.href} key={index}>{item.name}</a>
           ))}
-          <a href="#gallery" className="nav-btn-premium">View Gallery</a>
         </div>
 
-        {/* Hamburger to X Toggle Button */}
-        <button 
-          className={`menu-toggle ${menuOpen ? "is-active" : ""}`}
+        {/* HAMBURGER BUTTON */}
+        <div 
+          className={`menu-btn ${menuOpen ? "active" : ""}`} 
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
-          aria-expanded={menuOpen}
         >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
-      </div>
-
-      {/* Full Screen Mobile Overlay */}
-      <div className={`mobile-overlay ${menuOpen ? "open" : ""}`}>
-        <div className="overlay-inner">
-          <nav className="mobile-links">
-            {navLinks.map((link) => (
-              <a key={link.id} href={link.href} onClick={closeMenu}>
-                <small>{link.id}</small> {link.name}
-              </a>
-            ))}
-            <a href="#gallery" onClick={closeMenu}>
-              <small>04</small> Gallery
-            </a>
-          </nav>
-          
-          <div className="menu-footer">
-            <p>Based in Tamil Nadu</p>
-            <div className="social-mini">
-              <a href="#instagram">Instagram</a>
-              <a href="#behance">Behance</a>
-              <a href="#mail">Contact</a>
-            </div>
-          </div>
+          <span></span>
+          <span></span>
         </div>
       </div>
+
+      {/* MOBILE OVERLAY (Inspired by your Image) */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div 
+            className="mobile-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div 
+              className="mobile-menu-container"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
+            >
+              <div className="mobile-menu-list">
+                {navItems.map((item, index) => (
+                  <motion.div 
+                    key={index}
+                    className="mobile-item-wrapper"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <a href={item.href} onClick={() => setMenuOpen(false)}>
+                      {item.name}
+                      {item.hasSub && (
+                        <svg className="chevron" viewBox="0 0 24 24">
+                          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                      )}
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <div className="mobile-footer-simple">
+                <div className="mob-socials">
+                   <a href="#">INSTAGRAM</a>
+                   <a href="#">WHATSAPP</a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

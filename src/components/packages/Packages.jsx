@@ -1,5 +1,7 @@
 import "./Packages.css";
 
+import { motion } from "framer-motion";
+
 const packagesData = [
   {
     title: "Basic",
@@ -44,64 +46,156 @@ const packagesData = [
 ];
 
 export default function Packages() {
-  return (
-    <section className="packages" id="packages">
-      
-      {/* Header */}
-      <div className="packages-header">
-        <p>PRICING</p>
-        <h2>Event Packages</h2>
-      </div>
 
-      {/* Cards */}
+  return (
+
+    <section
+      className="packages"
+      id="packages"
+    >
+
+      {/* HEADER */}
+
+      <motion.div
+        className="packages-header"
+
+        initial={{
+          opacity:0,
+          y:40
+        }}
+
+        whileInView={{
+          opacity:1,
+          y:0
+        }}
+
+        transition={{
+          duration:1
+        }}
+
+        viewport={{
+          once:true
+        }}
+      >
+
+        <p>PRICING</p>
+
+        <h2>
+          Event <span>Packages</span>
+        </h2>
+
+      </motion.div>
+
+      {/* CARDS */}
+
       <div className="packages-container">
-        {packagesData.map((item, index) => (
-          <div
-            className={`package-card ${
-              item.badge ? "featured" : ""
-            }`}
+
+        {packagesData.map((item,index)=>(
+
+          <motion.div
+
             key={index}
+
+            className={`package-card ${
+              item.badge
+              ? "featured"
+              : ""
+            }`}
+
+            initial={{
+              opacity:0,
+              y:80
+            }}
+
+            whileInView={{
+              opacity:1,
+              y:0
+            }}
+
+            transition={{
+              duration:1,
+              delay:index * 0.2
+            }}
+
+            viewport={{
+              once:true
+            }}
+
+            whileHover={{
+              y:-14,
+              scale:1.02
+            }}
+
           >
-            {/* Badge */}
+
+            {/* badge */}
+
             {item.badge && (
+
               <div className="badge">
+
                 {item.badge}
+
               </div>
+
             )}
 
-            {/* Title */}
+            {/* title */}
+
             <h3>{item.title}</h3>
+
             <p className="subtitle">
+
               {item.subtitle}
+
             </p>
 
-            {/* Price */}
+            {/* price */}
+
             <div className="price-box">
+
               <h1>{item.price}</h1>
+
               <span className="event-text">
+
                 /event
+
               </span>
+
             </div>
 
-            {/* Features */}
+            {/* features */}
+
             <div className="features">
+
               {item.features.map(
-                (feature, i) => (
+                (feature,i)=>(
+
                   <p key={i}>
-                    {feature}
+
+                    ✦ {feature}
+
                   </p>
+
                 )
               )}
+
             </div>
 
-            {/* Fixed Button */}
+            {/* button */}
+
             <button className="package-btn">
-              Book Now ↗
+
+              Book Experience ↗
+
             </button>
-          </div>
+
+          </motion.div>
+
         ))}
+
       </div>
-      
+
     </section>
   );
 }

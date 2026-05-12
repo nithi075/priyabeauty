@@ -10,19 +10,21 @@ import Featured from "./components/featured/Featured";
 import Services from "./components/Services/Services"
 import About from "./components/About/About";
 import Hero from "./components/Hero/Hero";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <>
+      <Navbar/>
       {/* Home Section */}
       <section id="home">
         <Hero/>
       </section>
 
       {/* Services Section */}
-      <section id="services">
+      {/* <section id="services">
          <Services/>
-      </section>
+      </section> */}
 
        <section id="gallery">
         <Gallery/>

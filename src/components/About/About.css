@@ -1,85 +1,991 @@
-/* ================= MOBILE PERFECT MATCH ================= */
-@media (max-width: 768px) {
+/* =========================================
+   PREMIUM CINEMATIC ABOUT SECTION
+========================================= */
 
-  .about {
-    flex-direction: column;
-    background: var(--cream);
+.about{
+
+  position:relative;
+
+  width:100%;
+
+  background:
+  linear-gradient(
+    180deg,
+    #050505 0%,
+    #0b0b0b 45%,
+    #111111 100%
+  );
+
+  padding:160px 0;
+
+  overflow:hidden;
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  align-items:center;
+
+  gap:100px;
+
+}
+
+/* =========================================
+   GOLD AMBIENT GLOW
+========================================= */
+
+.about::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:650px;
+  height:650px;
+
+  top:-260px;
+  right:-180px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(212,175,55,.10),
+    transparent 72%
+  );
+
+  pointer-events:none;
+
+  filter:blur(10px);
+
+}
+
+.about::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:420px;
+  height:420px;
+
+  bottom:-180px;
+  left:-140px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(242,201,76,.06),
+    transparent 70%
+  );
+
+  pointer-events:none;
+
+}
+
+/* =========================================
+   LEFT IMAGE
+========================================= */
+
+.about-left{
+
+  position:relative;
+
+  width:100%;
+  height:920px;
+
+  overflow:hidden;
+
+}
+
+.about-left img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:
+  transform 2s cubic-bezier(0.16,1,0.3,1),
+  filter 1.2s ease;
+
+  filter:
+  brightness(.82)
+  contrast(1.06)
+  saturate(.95);
+
+}
+
+.about-left:hover img{
+
+  transform:scale(1.06);
+
+  filter:
+  brightness(.9)
+  contrast(1.08);
+
+}
+
+/* =========================================
+   IMAGE OVERLAY
+========================================= */
+
+.fade-overlay{
+
+  position:absolute;
+  inset:0;
+
+  background:
+
+  linear-gradient(
+    to right,
+    rgba(5,5,5,0.18),
+    rgba(5,5,5,0.62)
+  ),
+
+  linear-gradient(
+    to top,
+    rgba(5,5,5,0.86),
+    transparent 42%
+  );
+
+}
+
+/* luxury border */
+
+.about-left::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:30px;
+
+  border:1px solid
+  rgba(212,175,55,.18);
+
+  pointer-events:none;
+
+}
+
+/* =========================================
+   RIGHT CONTENT
+========================================= */
+
+.about-right{
+
+  width:min(88%,640px);
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+/* =========================================
+   SMALL LABEL
+========================================= */
+
+.about-small{
+
+  display:inline-block;
+
+  color:var(--gold-light);
+
+  font-size:.74rem;
+
+  font-weight:500;
+
+  letter-spacing:8px;
+
+  text-transform:uppercase;
+
+  margin-bottom:28px;
+
+  position:relative;
+
+}
+
+/* gold line */
+
+.about-small::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  bottom:-10px;
+
+  width:70px;
+  height:1px;
+
+  background:
+  linear-gradient(
+    to right,
+    var(--gold),
+    transparent
+  );
+
+}
+
+/* =========================================
+   TITLE
+========================================= */
+
+.about-title{
+
+  font-family:var(--heading-font);
+
+  font-size:clamp(3.2rem,5vw,6rem);
+
+  font-weight:500;
+
+  line-height:1.05;
+
+  color:var(--text-white);
+
+  margin-bottom:34px;
+
+  letter-spacing:3px;
+
+  text-transform:uppercase;
+
+}
+
+.about-title span{
+
+  font-family:var(--accent-font);
+
+  color:var(--gold);
+
+  font-style:italic;
+
+  text-transform:none;
+
+  letter-spacing:1px;
+
+}
+
+/* =========================================
+   SUBTEXT
+========================================= */
+
+.about-sub{
+
+  color:rgba(255,255,255,0.78);
+
+  font-size:1rem;
+
+  line-height:2;
+
+  margin-bottom:34px;
+
+  font-weight:300;
+
+  max-width:560px;
+
+}
+
+/* =========================================
+   MAIN TEXT
+========================================= */
+
+.about-text{
+
+  color:rgba(255,255,255,0.54);
+
+  font-size:.95rem;
+
+  line-height:2.15;
+
+  font-weight:300;
+
+  margin-bottom:56px;
+
+  max-width:560px;
+
+}
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.about-btn{
+
+  position:relative;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  background:none;
+
+  border:none;
+
+  color:var(--text-white);
+
+  font-size:.72rem;
+
+  letter-spacing:4px;
+
+  text-transform:uppercase;
+
+  padding-bottom:14px;
+
+  cursor:pointer;
+
+  transition:all .5s ease;
+
+}
+
+/* underline */
+
+.about-btn::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  width:100%;
+  height:1px;
+
+  background:
+  rgba(255,255,255,.16);
+
+  transition:.5s ease;
+
+}
+
+.about-btn:hover{
+
+  color:var(--gold-light);
+
+  transform:translateY(-3px);
+
+}
+
+.about-btn:hover::after{
+
+  background:var(--gold);
+
+  box-shadow:
+  0 0 14px rgba(212,175,55,.45);
+
+}
+
+/* arrow */
+
+.about-btn span{
+
+  transition:.4s ease;
+
+}
+
+.about-btn:hover span{
+
+  transform:translateX(6px);
+
+}
+
+/* =========================================
+   LARGE LAPTOP
+========================================= */
+
+@media(max-width:1400px){
+
+  .about{
+
+    gap:70px;
+
+    padding:130px 0;
+
   }
 
-  /* IMAGE TOP */
-  .about-left {
-    width: 100%;
-    height: 260px;
-    position: relative;
+  .about-left{
+
+    height:760px;
+
   }
 
-  .about-left img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media(max-width:991px){
+
+  .about{
+
+    grid-template-columns:1fr;
+
+    gap:70px;
+
+    padding:110px 0;
+
   }
 
-  /* FADE DOWN (IMPORTANT) */
-  .fade-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(245,243,239,0) 40%,
-      rgba(245,243,239,1) 100%
-    );
+  .about-left{
+
+    height:620px;
+
   }
 
-  /* TEXT BOX */
-  .about-right {
-    margin-top: -40px; /* overlap feel 🔥 */
-    padding: 30px 20px 40px;
-    text-align: center;
-    align-items: center;
-    background: var(--cream);
-    position: relative;
-    z-index: 2;
+  .about-right{
+
+    width:min(90%,720px);
+
+    margin:auto;
+
   }
 
-  /* SMALL TEXT */
-  .about-small {
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--gold);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .about{
+
+    padding:90px 0;
+
+    gap:45px;
+
   }
 
-  /* TITLE */
-  .about-title {
-    font-size: 1.9rem;
-    line-height: 1.3;
+  .about-left{
+
+    height:430px;
+
   }
 
-  .about-title span {
-    color: var(--olive);
+  .about-left::after{
+
+    inset:18px;
+
   }
 
-  /* SUB */
-  .about-sub {
-    font-size: 13px;
-    margin-bottom: 10px;
+  .about-right{
+
+    width:90%;
+
   }
 
-  /* DESC */
-  .about-text {
-    font-size: 12px;
-    line-height: 1.6;
+  .about-title{
+
+    font-size:3rem;
+
+    line-height:1.08;
+
+    letter-spacing:2px;
+
   }
 
-  /* BUTTON */
-  .about-btn {
-    margin-top: 15px;
-    background: var(--olive);
-    color: #fff;
-    padding: 12px 24px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    border: none;
+  .about-sub{
+
+    font-size:.92rem;
+
+    line-height:1.9;
+
+  }
+
+  .about-text{
+
+    font-size:.84rem;
+
+    line-height:1.95;
+
+  }
+
+  .about-small{
+
+    letter-spacing:5px;
+
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media(max-width:480px){
+
+  .about{
+
+    padding:70px 0;
+
+  }
+
+  .about-title{
+
+    font-size:2.35rem;
+
+  }
+
+  .about-left{
+
+    height:320px;
+
+  }
+
+  .about-btn{
+
+    letter-spacing:3px;
+
+    font-size:.66rem;
+
+  }
+
+}
+/* =========================================
+   MOBILE RESPONSIVE CSS
+========================================= */
+
+@media(max-width:768px){
+
+  .about{
+
+    grid-template-columns:1fr;
+
+    padding:90px 0;
+
+    gap:45px;
+
+  }
+
+  /* =========================
+     IMAGE
+  ========================= */
+
+  .about-left{
+
+    width:100%;
+
+    height:430px;
+
+  }
+
+  .about-left::after{
+
+    inset:18px;
+
+  }
+
+  .about-left img{
+
+    object-position:center;
+
+  }
+
+  /* =========================
+     CONTENT
+  ========================= */
+
+  .about-right{
+
+    width:90%;
+
+    margin:auto;
+
+    text-align:left;
+
+  }
+
+  /* small label */
+
+  .about-small{
+
+    font-size:.68rem;
+
+    letter-spacing:5px;
+
+    margin-bottom:22px;
+
+  }
+
+  .about-small::after{
+
+    width:55px;
+
+  }
+
+  /* title */
+
+  .about-title{
+
+    font-size:3rem;
+
+    line-height:1.08;
+
+    letter-spacing:2px;
+
+    margin-bottom:24px;
+
+  }
+
+  .about-title span{
+
+    display:inline-block;
+
+  }
+
+  /* sub text */
+
+  .about-sub{
+
+    font-size:.92rem;
+
+    line-height:1.9;
+
+    margin-bottom:26px;
+
+  }
+
+  /* body text */
+
+  .about-text{
+
+    font-size:.84rem;
+
+    line-height:1.95;
+
+    margin-bottom:40px;
+
+  }
+
+  /* button */
+
+  .about-btn{
+
+    font-size:.66rem;
+
+    letter-spacing:3px;
+
+    padding-bottom:10px;
+
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media(max-width:480px){
+
+  .about{
+
+    padding:70px 0;
+
+    gap:35px;
+
+  }
+
+  /* image */
+
+  .about-left{
+
+    height:320px;
+
+  }
+
+  .about-left::after{
+
+    inset:12px;
+
+  }
+
+  /* content */
+
+  .about-right{
+
+    width:92%;
+
+  }
+
+  /* heading */
+
+  .about-title{
+
+    font-size:2.3rem;
+
+    line-height:1.1;
+
+    letter-spacing:1.5px;
+
+  }
+
+  /* texts */
+
+  .about-sub{
+
+    font-size:.84rem;
+
+  }
+
+  .about-text{
+
+    font-size:.78rem;
+
+    line-height:1.85;
+
+  }
+
+  /* label */
+
+  .about-small{
+
+    font-size:.62rem;
+
+    letter-spacing:4px;
+
+  }
+
+  /* button */
+
+  .about-btn{
+
+    font-size:.62rem;
+
+    letter-spacing:2px;
+
+    gap:10px;
+
+  }
+
+}
+
+/* =========================================
+   EXTRA SMALL DEVICES
+========================================= */
+
+@media(max-width:360px){
+
+  .about-title{
+
+    font-size:2rem;
+
+  }
+
+  .about-left{
+
+    height:260px;
+
+  }
+
+  .about-text{
+
+    font-size:.75rem;
+
+  }
+
+}
+/* =========================================
+   CINEMATIC TEXT REVEAL
+========================================= */
+
+.about-right > *{
+
+  will-change: transform, opacity;
+
+}
+
+/* =========================================
+   TITLE GLOW EFFECT
+========================================= */
+
+.about-title{
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+.about-title::after{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-120%;
+
+  width:80%;
+  height:100%;
+
+  background:
+  linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.08),
+    transparent
+  );
+
+  transform:skewX(-20deg);
+
+  animation:titleShine 5s ease infinite;
+
+}
+
+@keyframes titleShine{
+
+  0%{
+    left:-120%;
+  }
+
+  40%{
+    left:130%;
+  }
+
+  100%{
+    left:130%;
+  }
+
+}
+
+/* =========================================
+   SMALL LABEL GLOW
+========================================= */
+
+.about-small{
+
+  animation:goldPulse 3s ease-in-out infinite;
+
+}
+
+@keyframes goldPulse{
+
+  0%{
+    opacity:.7;
+    text-shadow:0 0 0 rgba(212,175,55,0);
+  }
+
+  50%{
+    opacity:1;
+    text-shadow:
+    0 0 12px rgba(212,175,55,.35);
+  }
+
+  100%{
+    opacity:.7;
+    text-shadow:0 0 0 rgba(212,175,55,0);
+  }
+
+}
+
+/* =========================================
+   PARAGRAPH SMOOTH APPEAR
+========================================= */
+
+.about-sub,
+.about-text{
+
+  transform:translateY(10px);
+
+}
+
+/* =========================================
+   BUTTON PREMIUM HOVER
+========================================= */
+
+.about-btn{
+
+  overflow:hidden;
+
+}
+
+.about-btn::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-120%;
+
+  width:100%;
+  height:100%;
+
+  background:
+  linear-gradient(
+    120deg,
+    transparent,
+    rgba(212,175,55,.12),
+    transparent
+  );
+
+  transition:1s ease;
+
+}
+
+.about-btn:hover::before{
+
+  left:120%;
+
+}
+
+/* =========================================
+   IMAGE CINEMATIC FLOAT
+========================================= */
+
+.about-left img{
+
+  animation:slowFloat 8s ease-in-out infinite;
+
+}
+
+@keyframes slowFloat{
+
+  0%{
+    transform:scale(1) translateY(0px);
+  }
+
+  50%{
+    transform:scale(1.03) translateY(-8px);
+  }
+
+  100%{
+    transform:scale(1) translateY(0px);
+  }
+
+}
+
+/* =========================================
+   PREMIUM FADE OVERLAY
+========================================= */
+
+.fade-overlay{
+
+  backdrop-filter: blur(.5px);
+
+}
+
+/* =========================================
+   MOBILE OPTIMIZATION
+========================================= */
+
+@media(max-width:768px){
+
+  .about-title::after{
+
+    animation-duration:6s;
+
+  }
+
+  .about-left img{
+
+    animation:none;
+
   }
 
 }

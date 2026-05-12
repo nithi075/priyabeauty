@@ -1,42 +1,306 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+/* =========================================
+   CINEMATIC WEDDING TYPOGRAPHY SYSTEM
+========================================= */
 
-:root {
-  --heading-font: "Cormorant Garamond", serif;
-  --body-font: "Montserrat", sans-serif;
-  --gold: #b08d57;
-  --bg-color: #fcfaf7;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap');
+
+:root{
+
+  /* =========================================
+     PREMIUM FONT SYSTEM
+  ========================================= */
+
+  /* Main luxury serif */
+  --heading-font:"Cormorant Garamond",serif;
+
+  /* Elegant signature accent */
+  --accent-font:"Great Vibes",cursive;
+
+  /* Clean modern body */
+  --body-font:"Montserrat",sans-serif;
+
+  /* =========================================
+     COLORS
+  ========================================= */
+
+  --gold:#D4AF37;
+  --gold-light:#F2C94C;
+
+  --bg-color:#050505;
+
+  --text-white:#F8F8F8;
+
+  --text-soft:
+  rgba(255,255,255,0.72);
+
+  --text-muted:
+  rgba(255,255,255,0.52);
+
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* =========================================
+   RESET
+========================================= */
+
+*{
+
+  margin:0;
+  padding:0;
+
+  box-sizing:border-box;
+
 }
 
-html {
-  scroll-behavior: smooth;
+html{
+
+  scroll-behavior:smooth;
+
 }
 
-body {
-  font-family: var(--body-font);
-  background: var(--bg-color);
-  color: var(--text-color);
-  overflow-x: hidden;
+body{
+
+  font-family:var(--body-font);
+
+  background:var(--bg-color);
+
+  color:var(--text-white);
+
+  overflow-x:hidden;
+
+  -webkit-font-smoothing:antialiased;
+
+  text-rendering:optimizeLegibility;
+
+  font-weight:400;
+
+  letter-spacing:.2px;
+
 }
 
-/* All headings */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--heading-font);
-  font-weight: 500;
-  color: var(--text-color);
+/* =========================================
+   HEADINGS
+========================================= */
+
+h1,h2,h3,h4,h5,h6{
+
+  font-family:var(--heading-font);
+
+  font-weight:500;
+
+  letter-spacing:2px;
+
+  color:var(--text-white);
+
+  line-height:1.08;
+
 }
 
-/* Paragraphs */
-p, span, li, a, button {
-  font-family: var(--body-font);
+/* =========================================
+   HERO TITLES
+========================================= */
+
+.hero-title,
+.section-title{
+
+  font-size:
+  clamp(3.2rem,6vw,7rem);
+
+  line-height:1;
+
+  font-weight:500;
+
+  letter-spacing:1px;
+
 }
 
-/* Buttons */
-button {
-  cursor: pointer;
+/* =========================================
+   SIGNATURE ACCENT
+========================================= */
+
+.italic-accent,
+.signature-text{
+
+  font-family:var(--accent-font);
+
+  font-size:1.2em;
+
+  font-weight:400;
+
+  color:var(--gold);
+
+  letter-spacing:1px;
+
+  text-transform:none;
+
+}
+
+/* =========================================
+   BODY TYPOGRAPHY
+========================================= */
+
+p,
+span,
+li,
+a{
+
+  font-family:var(--body-font);
+
+  line-height:1.9;
+
+  font-weight:300;
+
+  color:var(--text-soft);
+
+}
+
+/* =========================================
+   PARAGRAPHS
+========================================= */
+
+p{
+
+  font-size:.96rem;
+
+  max-width:720px;
+
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+a{
+
+  text-decoration:none;
+
+  transition:.4s ease;
+
+}
+
+a:hover{
+
+  color:var(--gold);
+
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button{
+
+  cursor:pointer;
+
+  border:none;
+
+  background:none;
+
+  font-family:var(--body-font);
+
+  font-size:.72rem;
+
+  letter-spacing:3px;
+
+  text-transform:uppercase;
+
+  color:var(--text-white);
+
+  transition:.4s ease;
+
+}
+
+button:hover{
+
+  color:var(--gold);
+
+}
+
+/* =========================================
+   GOLD TEXT
+========================================= */
+
+.gold-text{
+
+  color:var(--gold);
+
+}
+
+/* =========================================
+   SMALL LABELS
+========================================= */
+
+.small-label{
+
+  font-size:.72rem;
+
+  letter-spacing:6px;
+
+  text-transform:uppercase;
+
+  color:var(--gold-light);
+
+  font-weight:500;
+
+}
+
+/* =========================================
+   QUOTES
+========================================= */
+
+blockquote{
+
+  font-family:var(--heading-font);
+
+  font-size:1.5rem;
+
+  line-height:1.6;
+
+  color:var(--text-white);
+
+  font-style:italic;
+
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:768px){
+
+  h1,h2,h3,h4,h5,h6{
+
+    line-height:1.05;
+
+  }
+
+  .hero-title,
+  .section-title{
+
+    font-size:
+    clamp(2.5rem,10vw,4.5rem);
+
+  }
+
+  p{
+
+    font-size:.88rem;
+
+    line-height:1.8;
+
+  }
+
+  .small-label{
+
+    letter-spacing:4px;
+
+  }
+
+  button{
+
+    font-size:.66rem;
+
+    letter-spacing:2px;
+
+  }
+
 }
