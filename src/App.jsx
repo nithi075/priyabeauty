@@ -6,7 +6,7 @@ import Instagram from "./components/instagram/Instagram";
 import Footer from "./components/footer/footer";
 import Gallery from "./pages/Gallery";
 import Location from "./components/location/Location";
-import Featured from "./components/featured/Featured";
+import Featured from "./components/featured/featured";
 import Services from "./components/Services/Services"
 import About from "./components/About/About";
 import Hero from "./components/Hero/Hero";
