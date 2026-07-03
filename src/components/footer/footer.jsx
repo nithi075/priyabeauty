@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import './Footer.css'
+import './footer.css'
 
 const portfolioLinks = [
   { label: 'Bridal Makeup', path: '/portfolio?category=bridal' },
