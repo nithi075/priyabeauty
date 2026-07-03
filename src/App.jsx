@@ -1,73 +1,62 @@
-import "./App.css";
+import { Routes, Route } from 'react-router-dom'
 
-import Packages from "./components/packages/Packages";   // NEW
-import Testimonials from "./components/testimonials/Testimonials";
-import Instagram from "./components/instagram/Instagram";
-import Footer from "./components/footer/footer";
-import Gallery from "./pages/Gallery";
-import Location from "./components/location/Location";
-import Featured from "./components/featured/featured";
-import Services from "./components/Services/Services"
-import About from "./components/About/About";
-import Hero from "./components/Hero/Hero";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from './components/Navbar/Navbar'
+import Hero from './components/Hero/Hero'
+import About from './components/About/About'
+import Gallery from './components/Gallery/Gallery'
+import Testimonials from './components/Testimonials/Testimonials'
+import Contact from './components/Contact/Contact'
+import Instagram from './components/instagram/instagram'
+import FAQ from './components/FreequentQ/faq'
+import Footer from './components/Footer/Footer'
+import Portfolio from './components/Portfolio/Portfolio'
+import ScrollToTop from './components/ScrollToTop'
+
+import './App.css'
+import Floating from './components/Floating/Floating'
+
+function Home() {
+  return (
+    <main>
+      <Hero />
+      <About />
+      
+      <section id="gallery">
+
+        <Gallery />
+
+      </section>
+      <Testimonials />
+      <section id="contact">
+
+        <Contact />
+
+      </section>
+      <Instagram />
+      <FAQ />
+      {/* <Floating/> */}
+    </main>
+  )
+}
 
 function App() {
   return (
-    <>
-      <Navbar/>
-      {/* Home Section */}
-      <section id="home">
-        <Hero/>
-      </section>
+    <div className="app">
+      <ScrollToTop />
 
-      {/* Services Section */}
-      {/* <section id="services">
-         <Services/>
-      </section> */}
+      <Navbar />
 
-       <section id="gallery">
-        <Gallery/>
-        </section>
-     
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-      {/* Gallery Section */}
-      <section id="gallery">
-        <Featured/>
-      </section>
+        {/* <Route path="/portfolio" element={<Portfolio />} /> */}
 
-      {/* About Section */}
-      <section id="about">
-        <About/>
-      </section>
 
-      {/* Video Section */}
-      <section id="packages">
-        <Packages />
-      </section>
-    
+      </Routes>
 
-      {/* Testimonials Section */}
-      <section id="testimonials">
-        <Testimonials />
-      </section>
-
-      {/* Instagram Section */}
-      <section id="instagram">
-        <Instagram />
-      </section>
-      {/* <section id="location">
-        <Location/>
-      </section> */}
-    
-
-      {/* Contact Section */}
-      <section id="contact">
-        <Footer />
-      </section>
-   
-    </>
-  );
+      <Footer />
+    </div>
+  )
 }
 
-export default App;
+export default App

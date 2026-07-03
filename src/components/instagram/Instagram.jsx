@@ -1,57 +1,69 @@
-import React from "react";
-import "./Instagram.css";
+import { motion } from 'framer-motion';
+import './Instagram.css';
 
-// Untha 6 images-a inge import pannikonga
-import insta1 from "../../assets/instagram/img1.jpg";
-import insta2 from "../../assets/instagram/img2.jpg";
-import insta3 from "../../assets/instagram/img3.jpg";
-import insta4 from "../../assets/instagram/img4.jpg";
-import insta5 from "../../assets/instagram/img5.jpg";
-import insta6 from "../../assets/instagram/img6.jpg";
+import gallery1 from '../../assets/gal1.jpg';
+import gallery2 from '../../assets/gal2.jpg';
+import gallery3 from '../../assets/gal3.jpg';
+import gallery4 from '../../assets/gal6.jpg';
+import gallery5 from '../../assets/gal4.jpg';
+import gallery6 from '../../assets/gal5.jpg';
 
-export default function Instagram() {
-  const images = [insta1, insta2, insta3, insta4, insta5, insta6];
+const Instagram = () => {
+  const images = [
+    gallery1,
+    gallery2,
+    gallery3,
+    gallery4,
+    gallery5,
+    gallery6,
+  ];
 
   return (
-    <section className="insta-container">
-      <div className="insta-header">
-        <span className="insta-tag">ART LIVES IN THE</span>
-        <h2 className="insta-title">INSTAGRAM</h2>
-      </div>
+    <section className="insta-feed" id="instagram">
 
-      <div className="insta-main-content">
-        {/* Left Side: 2 columns, 3 rows grid */}
-        <div className="insta-photo-grid">
-          {images.map((img, i) => (
-            <div key={i} className="insta-photo-item">
-              <img src={img} alt={`post-${i}`} />
+      <h2 className="insta-feed__title">
+        VISUAL NARRATIVES
+      </h2>
+
+      <a
+        href="https://www.instagram.com/zoomin_momentz/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="insta-feed__handle"
+      >
+        @zoomin_momentz
+      </a>
+
+      <div className="insta-feed__grid">
+
+        {images.map((img, i) => (
+
+          <motion.div
+            key={i}
+            className="insta-feed__item"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.7,
+              delay: i * 0.1,
+            }}
+            viewport={{ once: true }}
+          >
+            <div className="insta-feed__image">
+              <img
+                src={img}
+                alt={`Instagram Post ${i + 1}`}
+                loading="lazy"
+              />
             </div>
-          ))}
-        </div>
+          </motion.div>
 
-        {/* Right Side: Gold Box */}
-        <div className="insta-gold-box">
-          <div className="gold-content">
-            <h3>FOLLOW OUR JOURNEY</h3>
-            <p>Get inspired and follow us on Instagram</p>
-           <a
-  href="https://www.instagram.com/swaathy_artistry__/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="insta-btn"
->
-  <span className="btn-icon">📷</span>
-  FOLLOW OUR JOURNEY
-</a>
-          </div>
-         <div className="">
+        ))}
 
-
-
-
-         </div>
-        </div>
       </div>
+
     </section>
   );
-}
+};
+
+export default Instagram;

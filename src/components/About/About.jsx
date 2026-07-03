@@ -1,75 +1,76 @@
-import "./About.css";
-import { motion } from "framer-motion";
+import './About.css'
 
-// Import your own image
-import aboutImage from "../../assets/about1.jpg";
+import video1 from '../../assets/about1.mp4'
+import video2 from '../../assets/about2.mp4'
 
-function About() {
-  return (
-    <section className="about-section" id="about">
-      {/* IMAGE SIDE */}
-      <motion.div
-        className="about-image-wrapper"
-        initial={{ opacity: 0, x: -80 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* DECORATIVE SHAPES */}
-        <div className="shape shape-top"></div>
-        <div className="shape shape-bottom"></div>
+export default function About() {
+return ( <section className="about" id="about" aria-labelledby="about-heading"> <div className="about__container">
 
-        <div className="about-image">
-          <img
-            src={aboutImage}
-            alt="Swaathy Artistry"
-          />
-        </div>
-      </motion.div>
 
-      {/* CONTENT SIDE */}
-      <motion.div
-        className="about-content"
-        initial={{ opacity: 0, x: 80 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <span className="about-tag">
-          MEET THE ARTIST
-        </span>
+    {/* ---- Video Column ---- */}
+    <div className="about__images">
 
-        <h2>Swaathy Artistry</h2>
+      <div className="about__img-primary">
+        <video
+          className="about__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src={video1} type="video/mp4" />
+        </video>
+      </div>
 
-        <p>
-          I believe that every face tells a unique story,
-          and my goal is to enhance your natural beauty
-          rather than mask it. With specialized experience
-          across bridal, editorial, and luxury beauty
-          styling, I bring a refined, customized approach
-          to every client.
-        </p>
+      <div className="about__img-secondary">
+        <video
+          className="about__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src={video2} type="video/mp4" />
+        </video>
+      </div>
 
-        <p>
-          Whether it's your wedding day, engagement
-          session, or intimate celebration, I ensure you
-          step out feeling radiant, confident, and
-          absolutely flawless.
-        </p>
+    </div>
 
-        {/* BUTTON */}
-        <div className="about-buttons">
-          <motion.button
-            whileHover={{
-              y: -4,
-              scale: 1.03,
-            }}
-            className="read-more-btn"
-          >
-            Read More
-          </motion.button>
-        </div>
-      </motion.div>
-    </section>
-  );
+  {/* ---- Text Column ---- */}
+<div className="about__text">
+  <span className="section-label">
+    About Priya's Beauty Lounge
+  </span>
+
+  <h2 className="about__heading" id="about-heading">
+    Enhancing Your Natural Beauty With Elegance & Perfection
+  </h2>
+
+  <p className="about__body">
+    At <strong>Priya's Beauty Lounge</strong>, every makeover is designed to
+    highlight your unique beauty while preserving your natural charm. With
+    over <strong>6+ years of professional experience</strong>, we specialize
+    in luxury bridal makeup, flawless skin finishes, elegant saree draping,
+    and personalized beauty services for every special occasion.
+  </p>
+
+  <p className="about__body">
+    From bridal ceremonies and receptions to engagements, baby showers, and
+    festive celebrations, our mission is to create timeless, graceful looks
+    that make you feel confident and radiant. Using premium products,
+    modern techniques, and a passion for perfection, we ensure every client
+    receives a customized beauty experience. We are also available for
+    destination weddings and travel bookings across locations.
+  </p>
+
+  <a href="#contact" className="btn about__cta">
+    Book Your Appointment
+  </a>
+</div>
+
+  </div>
+</section>
+
+
+)
 }
-
-export default About;

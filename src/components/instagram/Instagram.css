@@ -1,678 +1,214 @@
-/* FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Montserrat:wght@300;400&display=swap');
+/* ==========================================
+   INSTAGRAM FEED
+   Contact Section Color Palette
+========================================== */
 
-/* ========================================
-   ROOT COLORS (Updated with your Footer Palette)
-======================================== */
-
-:root {
-
-  --olive:#6a341f;       /* Footer background color injected here */
-
-  --olive-dark:#1a0f08;  /* Even darker shade of footer color for depth */
-
-  --gold:#C5A377;
-
-  --gold-light:#D7B58A;
-
-  --cream:#EEF0E8;
-
-  --off-white:#F5F5F0;
-
-  --beige:#ECE8DF;
-
-  --white:#FFFFFF;
-
-  --text-dark:#2D2D2D;
-
-  --text-soft:
-  rgba(45,45,45,.68);
-
-  --transition:
-  all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-
+.insta-feed {
+  padding: var(--sp-20) var(--sp-5);
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
 }
 
-/* ========================================
-   SECTION
-======================================== */
+.insta-feed__title {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-dark);
+  margin-bottom: var(--sp-2);
+}
 
-.insta-container {
+.insta-feed__handle {
+  display: block;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-light-gray);
+  margin-bottom: var(--sp-12);
+  transition: color var(--transition-base);
+  position: relative;
+}
 
-  position:relative;
+.insta-feed__handle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width var(--transition-base);
+}
 
-  background:
+.insta-feed__handle:hover {
+  color: var(--color-gold);
+}
 
-  radial-gradient(
-    circle at top right,
-    rgba(197,163,119,.08),
-    transparent 30%
-  ),
+.insta-feed__handle:hover::after {
+  width: 120px;
+}
 
-  linear-gradient(
-    180deg,
-    #F5F5F0 0%,
-    #EEF0E8 45%,
-    #ECE8DF 100%
+/* ===== Gallery Grid ===== */
+
+.insta-feed__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.insta-feed__item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--color-off-white);
+  cursor: pointer;
+}
+
+.insta-feed__image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.insta-feed__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+/* Contact Hero Overlay Inspired Hover */
+
+.insta-feed__item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.35) 100%
   );
-
-  padding:100px 0 0;
-
-  overflow:hidden;
-
+  transition: opacity var(--transition-base);
 }
 
-/* ambient glow */
-
-.insta-container::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:700px;
-  height:700px;
-
-  top:-320px;
-  right:-220px;
-
-  background:
-  radial-gradient(
-    circle,
-    rgba(197,163,119,.08),
-    transparent 72%
-  );
-
-  filter:blur(10px);
-
-  pointer-events:none;
-
+.insta-feed__item:hover::before {
+  opacity: 1;
 }
 
-/* ========================================
-   HEADER
-======================================== */
-
-.insta-header {
-
-  text-align:center;
-
-  margin-bottom:50px;
-
-  position:relative;
-
-  z-index:2;
-
+.insta-feed__item:hover img {
+  transform: scale(1.04);
 }
 
-.insta-tag {
-
-  display:block;
-
-  font-family:'Montserrat',sans-serif;
-
-  font-size:.68rem;
-
-  letter-spacing:6px;
-
-  color:var(--gold);
-
-  margin-bottom:16px;
-
-}
-
-.insta-title {
-
-  font-family:'Cormorant Garamond',serif;
-
-  font-size:
-  clamp(2.5rem,5vw,4.5rem);
-
-  letter-spacing:2px;
-
-  color:var(--olive);
-
-  font-weight:500;
-
-}
-
-/* ========================================
-   MAIN LAYOUT
-======================================== */
-
-.insta-main-content {
-
-  display:flex;
-
-  width:100%;
-
-  flex-direction:row;
-
-  align-items:stretch;
-
-}
-
-/* ========================================
-   IMAGE GRID
-======================================== */
-
-.insta-photo-grid {
-
-  flex:1.25;
-
-  display:grid;
-
-  grid-template-columns:
-  repeat(2,1fr);
-
-  gap:4px;
-
-}
-
-/* image item */
-
-.insta-photo-item {
-
-  position:relative;
-
-  aspect-ratio:1/1;
-
-  overflow:hidden;
-
-  background:#ddd;
-
-}
-
-/* image */
-
-.insta-photo-item img {
-
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  transition:
-  transform 1.2s cubic-bezier(0.16,1,0.3,1),
-  filter 1s ease;
-
-  filter:
-  brightness(.92)
-  contrast(1.04);
-
-}
-
-/* cinematic hover */
-
-.insta-photo-item:hover img {
-
-  transform:
-  scale(1.08);
-
-  filter:
-  brightness(.98)
-  contrast(1.08);
-
-}
-
-/* overlay */
-
-.insta-photo-item::after{
-
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-  linear-gradient(
-    to top,
-    rgba(44,26,14,.28), /* Matching with footer color values */
-    transparent
-  );
-
-}
-
-/* ========================================
-   RIGHT CONTENT BOX
-======================================== */
-
-.insta-gold-box {
-
-  flex:1;
-
-  position:relative;
-
-  background:
-
-  linear-gradient(
-    145deg,
-    #6a341f, /* Updated to match footer background exactly */
-    #1a0f08
-  );
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:30px;
-
-  overflow:hidden;
-
-  border-left:
-  1px solid rgba(255,255,255,.06);
-
-}
-
-/* gold glow */
-
-.insta-gold-box::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:500px;
-  height:500px;
-
-  background:
-  radial-gradient(
-    circle,
-    rgba(197,163,119,.14),
-    transparent 70%
-  );
-
-  pointer-events:none;
-
-}
-
-/* ========================================
-   CONTENT
-======================================== */
-
-.gold-content {
-
-  text-align:center;
-
-  color:#fff;
-
-  position:relative;
-
-  z-index:2;
-
-  animation:
-  floatContent 6s ease-in-out infinite;
-
-}
-
-.gold-content h3 {
-
-  font-family:
-  'Cormorant Garamond',
-  serif;
-
-  font-size:1.8rem;
-
-  margin-bottom:18px;
-
-  letter-spacing:1px;
-
-  color:#fff;
-
-}
-
-.gold-content p {
-
-  font-family:
-  'Montserrat',
-  sans-serif;
-
-  font-size:.78rem;
-
-  margin-bottom:30px;
-
-  opacity:.82;
-
-  line-height:2;
-
-  color:
-  rgba(255,255,255,.72);
-
-}
-
-/* ========================================
-   BUTTON
-======================================== */
-
-.insta-btn {
-
-  position:relative;
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border:
-  1px solid rgba(255,255,255,.12);
-
-  background:#fff;
-
-  padding:14px 24px;
-
-  color:var(--olive);
-
-  text-decoration:none;
-
-  font-size:.7rem;
-
-  font-family:
-  'Montserrat',
-  sans-serif;
-
-  letter-spacing:3px;
-
-  overflow:hidden;
-
-  transition:.5s ease;
-
-}
-
-/* shine */
-
-.insta-btn::before{
-
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:-120%;
-
-  width:100%;
-  height:100%;
-
-  background:
-  linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,.28),
-    transparent
-  );
-
-  transition:1s ease;
-
-}
-
-.insta-btn:hover::before{
-
-  left:120%;
-
-}
-
-/* hover */
-
-.insta-btn:hover {
-
-  background:var(--gold);
-
-  color:#FFFFFF; /* Modified to white for better contrast over gold button background */
-
-  transform:
-  translateY(-3px);
-
-  box-shadow:
-  0 10px 30px rgba(197,163,119,.22);
-
-}
-
-/* ========================================
-   FLOATING ANIMATION
-======================================== */
-
-@keyframes floatContent{
-
-  0%{
-    transform:translateY(0px);
+/* ==========================================
+   Tablet
+========================================== */
+
+@media (max-width: 1024px) {
+  .insta-feed {
+    padding: var(--sp-16) var(--sp-4);
   }
 
-  50%{
-    transform:translateY(-6px);
+  .insta-feed__title {
+    font-size: var(--fs-2xl);
   }
 
-  100%{
-    transform:translateY(0px);
+  .insta-feed__grid {
+    gap: var(--sp-2);
   }
-
 }
 
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width:768px) {
-
-  .insta-container {
-
-    padding:70px 0 0;
-    margin-bottom: 80px;
-
-  }
-
-  .insta-main-content {
-
-    flex-direction:row;
-
-  }
-
-  .insta-title {
-
-    font-size:2.2rem;
-
-  }
-
-  .insta-photo-grid {
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-  }
-
-  .gold-content h3 {
-
-    font-size:1.1rem;
-
-  }
-
-  .gold-content p {
-
-    font-size:.68rem;
-
-    line-height:1.8;
-
-  }
-
-  .insta-btn {
-
-    font-size:.58rem;
-
-    padding:10px 14px;
-
-    letter-spacing:2px;
-
-  }
-
-}
-
-/* ========================================
-   DESKTOP
-======================================== */
-
-@media (min-width:768px) {
-
-  .insta-photo-grid {
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-  }
-
-}
-
-/* ========================================
-   MOBILE RESPONSIVE CSS ONLY
-======================================== */
+/* ==========================================
+   Mobile
+========================================== */
 
 @media (max-width: 768px) {
-
-  .insta-container::before {
-
-    width: 320px;
-    height: 320px;
-
-    top: -140px;
-    right: -120px;
+  .insta-feed {
+    padding: var(--sp-12) var(--sp-3);
   }
 
-  .insta-header {
-
-    margin-bottom: 35px;
-
-    padding: 0 5%;
+  .insta-feed__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
-  .insta-tag {
-
-    font-size: 0.58rem;
-
-    letter-spacing: 4px;
-
-    margin-bottom: 12px;
+  .insta-feed__title {
+    font-size: var(--fs-2xl);
   }
 
-  .insta-title {
-
-    font-size: 2rem;
-
-    line-height: 1.15;
-
-    letter-spacing: 1px;
+  .insta-feed__handle {
+    margin-bottom: var(--sp-8);
   }
-
-  .insta-gold-box::before {
-
-    width: 260px;
-    height: 260px;
-  }
-
-  .gold-content {
-
-    animation: none;
-  }
-
-  .gold-content h3 {
-
-    font-size: 1.3rem;
-
-    margin-bottom: 14px;
-
-    line-height: 1.3;
-  }
-
-  .gold-content p {
-
-    font-size: 0.72rem;
-
-    line-height: 1.9;
-
-    margin-bottom: 24px;
-  }
-
-  .insta-btn {
-
-    font-size: 0.58rem;
-
-    letter-spacing: 2px;
-
-    padding: 11px 16px;
-  }
-
 }
 
-/* ========================================
-   SMALL MOBILE
-======================================== */
+/* ==========================================
+   Small Mobile
+========================================== */
 
 @media (max-width: 480px) {
-
-  .insta-container {
-
-    padding: 60px 0 0;
+  .insta-feed {
+    padding: var(--sp-10) var(--sp-2);
   }
 
-  .insta-header {
-
-    margin-bottom: 28px;
+  .insta-feed__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
 
-  .insta-title {
-
-    font-size: 1.7rem;
+  .insta-feed__title {
+    font-size: var(--fs-xl);
   }
 
-  .insta-tag {
-
-    font-size: 0.52rem;
-
-    letter-spacing: 3px;
+  .insta-feed__handle {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--sp-6);
+  }
+}
+@media (max-width: 768px) {
+  .insta-feed {
+    padding: var(--sp-12) var(--sp-3);
   }
 
-  .gold-content h3 {
-
-    font-size: 1.1rem;
+  .insta-feed__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
 
-  .gold-content p {
-
-    font-size: 0.68rem;
-
-    line-height: 1.8;
+  .insta-feed__title {
+    font-size: var(--fs-2xl);
   }
 
-  .insta-btn {
-
-    font-size: 0.54rem;
-
-    padding: 10px 14px;
-
-    letter-spacing: 1.5px;
+  .insta-feed__handle {
+    margin-bottom: var(--sp-8);
   }
-
 }
 
-/* ========================================
-   EXTRA SMALL DEVICES
-======================================== */
-
-@media (max-width: 360px) {
-
-  .insta-title {
-
-    font-size: 1.5rem;
+@media (max-width: 480px) {
+  .insta-feed {
+    padding: var(--sp-20) var(--sp-2);
   }
 
-  .gold-content h3 {
-
-    font-size: 1rem;
+  .insta-feed__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
   }
 
-  .gold-content p {
-
-    font-size: 0.64rem;
+  .insta-feed__title {
+    font-size: var(--fs-xl);
   }
 
+  .insta-feed__handle {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--sp-6);
+  }
 }
